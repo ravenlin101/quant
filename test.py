@@ -15,4 +15,4 @@ cursor.execute(sql)
 
 results = cursor.fetchall()
 
-print(results[0])
+print(results[0][0])
