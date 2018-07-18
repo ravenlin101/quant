@@ -1,0 +1,19 @@
+from futuquant import *
+import sqlite3
+import pandas
+
+quote_ctx = OpenQuoteContext(host='127.0.0.1', port=11111)
+lines = quote_ctx.get_stock_basicinfo(Market.HK, SecurityType.STOCK)
+quote_ctx.close()
+
+cnx = sqlite3.connect('D:\\test.db')
+
+lines[1].to_sql('stockInfo', cnx, if_exists= 'replace')
+
+
+"""
+if_exists : {'fail', 'replace', 'append'}, default 'fail'
+    - fail: If table exists, do nothing.
+    - replace: If table exists, drop it, recreate it, and insert data.
+    - append: If table exists, insert data. Create if does not exist.
+"""
